@@ -15,7 +15,7 @@ import java.awt.*;
 
 //to specify some actionevent
 public class calculator extends JPanel implements ActionListener {
-  private JTextField display = new JTextField("0");
+  final private JTextField display = new JTextField("0");
   private double result = 0;
   private String operator = "=";
   private boolean calculating = true;
@@ -66,17 +66,16 @@ public class calculator extends JPanel implements ActionListener {
     }
   }
  
+
   private void calculate(double n) {
-    if (operator.equals("+"))
-      result += n;
-    else if (operator.equals("-"))
-      result -= n;
-    else if (operator.equals("*"))
-      result *= n;
-    else if (operator.equals("/"))
-      result /= n;
-    else if (operator.equals("="))
-      result = n;
+    switch (operator) {
+      case "+" -> result += n;
+      case "-" -> result -= n;
+      case "*" -> result *= n;
+      case "/" -> result /= n;
+      case "=" -> result = n;
+    }
+
     display.setText("" + result);
   }
  
@@ -93,6 +92,6 @@ public class calculator extends JPanel implements ActionListener {
  
     Container contentPane = frame.getContentPane();
     contentPane.add(new calculator());
-    frame.show();
+    frame.setVisible(true); // frame.show() is deprecated
   }    
 }
